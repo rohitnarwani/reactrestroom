@@ -15,7 +15,7 @@ export const userActions = {
 function login(user) {
     return dispatch => {
         dispatch(request(user));
-        axios.post('/login', { user })
+        axios.post('/login', user)
         .then((result) => {
           history.push("/");
         });
