@@ -15,7 +15,7 @@ export const userActions = {
 function login(user) {
     return dispatch => {
         dispatch(request(user));
-        axios.post('/login', { user })
+        axios.post('/login', user)
         .then((result) => {
           history.push("/");
         });
@@ -24,7 +24,7 @@ function login(user) {
 
     //     userService.login(username, password)
     //         .then(
-    //             user => { 
+    //             user => {
     //                 dispatch(success(user));
     //                 history.push('/');
     //             },
@@ -48,14 +48,14 @@ function logout() {
 function register(user) {
     return dispatch => {
         dispatch(request(user));
-        axios.post('/users', { user })
+        return axios.post('/users', user)
         .then((result) => {
           history.push("/login");
         });
-        
+
         // userService.register(user)
         //     .then(
-        //         user => { 
+        //         user => {
         //             dispatch(success());
         //             history.push('/login');
         //             dispatch(alertActions.success('Registration successful'));
@@ -95,7 +95,7 @@ function _delete(id) {
 
         userService.delete(id)
             .then(
-                user => { 
+                user => {
                     dispatch(success(id));
                 },
                 error => {

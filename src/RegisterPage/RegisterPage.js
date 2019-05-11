@@ -12,6 +12,8 @@ class RegisterPage extends React.Component {
             user: {
                 firstName: '',
                 lastName: '',
+                emailAddress: '',
+                mobileNumber: '',
                 username: '',
                 password: ''
             },
@@ -39,7 +41,7 @@ class RegisterPage extends React.Component {
         this.setState({ submitted: true });
         const { user } = this.state;
         const { dispatch } = this.props;
-        if (user.firstName && user.lastName && user.username && user.password) {
+        if (user.firstName && user.lastName && user.emailAddress && user.mobileNumber && user.username && user.password) {
             dispatch(userActions.register(user));
         }
     }
@@ -65,6 +67,20 @@ class RegisterPage extends React.Component {
                             <div className="help-block">Last Name is required</div>
                         }
                     </div>
+                    <div className={'form-group' + (submitted && !user.emailAddress ? ' has-error' : '')}>
+                        <label htmlFor="emailAddress">Email Address</label>
+                        <input type="text" className="form-control" name="emailAddress" value={user.emailAddress} onChange={this.handleChange} />
+                        {submitted && !user.emailAddress &&
+                            <div className="help-block">Email Address is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !user.mobileNumber ? ' has-error' : '')}>
+                        <label htmlFor="mobileNumber">Mobile Number</label>
+                        <input type="text" className="form-control" name="mobileNumber" value={user.mobileNumber} onChange={this.handleChange} />
+                        {submitted && !user.mobileNumber &&
+                            <div className="help-block">Mobile Number is required</div>
+                        }
+                    </div>
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
@@ -81,7 +97,7 @@ class RegisterPage extends React.Component {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
-                        {registering && 
+                        {registering &&
                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                         }
                         <Link to="/login" className="btn btn-link">Cancel</Link>
